@@ -10,11 +10,13 @@ def sim(alpha, beta, sigma, steps, years, initial):
     dr = alpha(beta - r)dt + sigma dW
     """
     delta_t = 1 / steps
+    num_points = steps * years
     i = 0
+    rands = random.normal(key, shape=(num_points,1))
     r = jnp.zeros(steps * years)
     r = r.at[0].set(initial)
     while (i < steps):
-        r = r.at[i + 1].set(r.at[i] + alpha * (beta - r.at[i]) * (delta_t) + sigma * jnp.sqrt(delta_t) * random.normal(key, shape=(1,1)) # <- returns same value change
+        r = r.at[i + 1].set(r.at[i] + alpha * (beta - r.at[i]) * (delta_t) + sigma * jnp.sqrt(delta_t) * rands[i]  
 
 
 
