@@ -16,8 +16,9 @@ def sim(alpha, beta, sigma, steps, years, initial):
     r = jnp.zeros(steps * years)
     r = r.at[0].set(initial)
     while (i < steps):
-        r = r.at[i + 1].set(r.at[i] + alpha * (beta - r.at[i]) * (delta_t) + sigma * jnp.sqrt(delta_t) * rands[i]  
+        r = r.at[i + 1].set(r.at[i].get() + alpha * (beta - r.at[i].get()) * (delta_t) + sigma * jnp.sqrt(delta_t) * rands[i])
+        i = i + 1
+
+    return(r)
 
 
-
-        i =+ 1
